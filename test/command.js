@@ -1,195 +1,192 @@
 /* global describe, it */
 
-'use strict';
+'use strict'
 
-var proxyquire = require('proxyquire');
-var assert = require('assert');
+var proxyquire = require( 'proxyquire' )
+var assert = require( 'assert' )
 
-var mockContainer = function() { };
+var mockContainer = function () { }
 /**
  * Mock the Containers object
  */
-var Command = proxyquire('../lib/command', { './container': { container: mockContainer } });
+var Command = proxyquire( '../lib/command', { './container': { container: mockContainer } } )
 
-describe('command', function() {
-
-	describe('#processArgs()', function() {
-
+describe( 'command', function () {
+	describe( '#processArgs()', function () {
 		/**
-		 * Simple dockunit call with no arguments
+		 * Simple lucyunit call with no arguments
 		 */
-		it('Test no special args', function() {
-			Command.setGlobals();
+		it( 'Test no special args', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: []
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 1);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 1 )
+		} )
 
 		/**
 		 * Set a custom path
 		 */
-		it('Test custom path', function() {
-			Command.setGlobals();
+		it( 'Test custom path', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: ['path']
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, 'path');
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 1);
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, 'path' )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 1 )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Set a simple command to be verbose
 		 */
-		it('Test verbose command', function() {
-			Command.setGlobals();
+		it( 'Test verbose command', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: [],
 				'lcy-verbose': true
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, true);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 1);
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, true )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 1 )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Pass just a simple option to the test command
 		 */
-		it('Test pass argument to test command', function() {
-			Command.setGlobals();
+		it( 'Test pass argument to test command', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: [],
 				special: 'test'
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 2);
-			assert.equal(global.testArgs.special, 'test');
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 2 )
+			assert.equal( global.testArgs.special, 'test' )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Test running a specific container with the --lcy-container option
 		 */
-		it('Test good container option', function() {
-			Command.setGlobals();
+		it( 'Test good container option', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: [],
 				special: 'test',
 				'lcy-container': 2
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, 2);
-			assert.equal(Object.keys(global.testArgs).length, 2);
-			assert.equal(global.testArgs.special, 'test');
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, 2 )
+			assert.equal( Object.keys( global.testArgs ).length, 2 )
+			assert.equal( global.testArgs.special, 'test' )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Test 0 as container option
 		 */
-		it('Test 0 as container option', function() {
-			Command.setGlobals();
+		it( 'Test 0 as container option', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: [],
 				special: 'test',
 				'lcy-container': 0
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, 0);
-			assert.equal(Object.keys(global.testArgs).length, 2);
-			assert.equal(global.testArgs.special, 'test');
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, 0 )
+			assert.equal( Object.keys( global.testArgs ).length, 2 )
+			assert.equal( global.testArgs.special, 'test' )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Test a bad container option value
 		 */
-		it('Test bad container option', function() {
-			Command.setGlobals();
+		it( 'Test bad container option', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: [],
 				special: 'test',
 				'lcy-container': 'sdfsdf'
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, process.cwd());
-			assert.equal(global.config.verbose, false);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 2);
-			assert.equal(global.testArgs.special, 'test');
-			assert.equal(global.testArgs._.length, 0);
-		});
+			assert.equal( global.config.path, process.cwd() )
+			assert.equal( global.config.verbose, false )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 2 )
+			assert.equal( global.testArgs.special, 'test' )
+			assert.equal( global.testArgs._.length, 0 )
+		} )
 
 		/**
 		 * Pass a path as well as a test arg. Set to verbose and pass two options to the test command.
 		 */
-		it('Test complex command', function() {
-			Command.setGlobals();
+		it( 'Test complex command', function () {
+			Command.setGlobals()
 
 			var argv = {
 				_: ['path', 'test-arg'],
 				special: 'test',
 				'lcy-verbose': true,
 				special2: true
-			};
+			}
 
-			Command.processArgs(argv);
+			Command.processArgs( argv )
 
-			assert.equal(global.config.path, 'path');
-			assert.equal(global.config.verbose, true);
-			assert.equal(global.config.help, false);
-			assert.equal(global.config.container, false);
-			assert.equal(Object.keys(global.testArgs).length, 3);
-			assert.equal(global.testArgs.special, 'test');
-			assert.equal(global.testArgs.special2, true);
-			assert.equal(global.testArgs._.length, 1);
-		});
-	});
-
-});
+			assert.equal( global.config.path, 'path' )
+			assert.equal( global.config.verbose, true )
+			assert.equal( global.config.help, false )
+			assert.equal( global.config.container, false )
+			assert.equal( Object.keys( global.testArgs ).length, 3 )
+			assert.equal( global.testArgs.special, 'test' )
+			assert.equal( global.testArgs.special2, true )
+			assert.equal( global.testArgs._.length, 1 )
+		} )
+	} )
+} )
