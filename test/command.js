@@ -62,7 +62,7 @@ describe('command', function() {
 
 			var argv = {
 				_: [],
-				'du-verbose': true
+				'lcy-verbose': true
 			};
 
 			Command.processArgs(argv);
@@ -98,7 +98,7 @@ describe('command', function() {
 		});
 
 		/**
-		 * Test running a specific container with the --du-container option
+		 * Test running a specific container with the --lcy-container option
 		 */
 		it('Test good container option', function() {
 			Command.setGlobals();
@@ -106,7 +106,7 @@ describe('command', function() {
 			var argv = {
 				_: [],
 				special: 'test',
-				'du-container': 2
+				'lcy-container': 2
 			};
 
 			Command.processArgs(argv);
@@ -129,7 +129,7 @@ describe('command', function() {
 			var argv = {
 				_: [],
 				special: 'test',
-				'du-container': 0
+				'lcy-container': 0
 			};
 
 			Command.processArgs(argv);
@@ -152,7 +152,7 @@ describe('command', function() {
 			var argv = {
 				_: [],
 				special: 'test',
-				'du-container': 'sdfsdf'
+				'lcy-container': 'sdfsdf'
 			};
 
 			Command.processArgs(argv);
@@ -175,7 +175,7 @@ describe('command', function() {
 			var argv = {
 				_: ['path', 'test-arg'],
 				special: 'test',
-				'du-verbose': true,
+				'lcy-verbose': true,
 				special2: true
 			};
 

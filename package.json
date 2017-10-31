@@ -1,13 +1,13 @@
 {
-  "name": "dockunit-plus",
-  "version": "0.6.0",
+  "name": "lucyunit",
+  "version": "1.0.0",
   "description": "Containerized unit testing across any platform and programming language",
-  "author": "Dockunit.io and Adam Wallner",
+  "author": "Bogdan Preda based on work of Dockunit.io and Adam Wallner",
   "bin": {
-    "dockunit": "./bin/dockunit"
+    "lucyunit": "./bin/lucyunit"
   },
   "bugs": {
-    "url": "https://github.com/wallneradam/dockunit/issues"
+    "url": "https://github.com/bogdanWK/lucyunit/issues"
   },
   "dependencies": {
     "colors": "^1.0.3",
@@ -23,7 +23,7 @@
   "engines": {
     "node": "*"
   },
-  "homepage": "https://github.com/dockunit/dockunit#readme",
+  "homepage": "https://github.com/bogdanWK/lucyunit#readme",
   "keywords": [
     "docker",
     "phpunit",
@@ -44,7 +44,7 @@
   "main": "./lib/command.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/dockunit/dockunit.git"
+    "url": "git://github.com/bogdanWK/lucyunit.git"
   },
   "scripts": {
     "test": "mocha"
