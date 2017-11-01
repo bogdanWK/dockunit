@@ -1,8 +1,8 @@
 {
   "name": "lucyunit",
   "version": "1.0.0",
-  "description": "Containerized unit testing across any platform and programming language",
-  "author": "Bogdan Preda based on work of Dockunit.io and Adam Wallner",
+  "description": "Containerized unit testing across any platform and programming language based on work of Dockunit.io and Adam Wallner",
+  "author": "Bogdan Preda",
   "bin": {
     "lucyunit": "./bin/lucyunit"
   },
