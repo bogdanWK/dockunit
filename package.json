@@ -1,6 +1,6 @@
 {
   "name": "lucyunit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Containerized unit testing across any platform and programming language based on work of Dockunit.io and Adam Wallner",
   "author": "Bogdan Preda",
   "bin": {
