@@ -9,16 +9,18 @@ It is a fork of https://github.com/dockunit/dockunit . It has plus features of t
 It was not just useless, but could cause data loss if there are some errors or container was stopped while the process was running. 
 Also could be very slow...
 - Default shell is not /bin/bash, but /bin/sh
-- The shell can be specified in the `Dockunit.json`
+- The shell can be specified in the `Lucyunit.json`
 - Color output of Docker container (very useful e.g. with Mocha)
 
 ## Purpose
 
+**Note:** This will be purposed towoards wordpress development cycle, a lot of things will be opiononated on that.
+
 We all want to test our applications on as many relevant platforms as possible. Sometimes this is easy.
-Sometimes it's not. Dockunit let's you define a set of Docker containers to run your tests against. You can run your
+Sometimes it's not. Lucyunit let's you define a set of Docker containers to run your tests against. You can run your
 test framework of choice in your language of choice on any type of environment. In the past many developers, myself
 included, have relied on Travis CI to run tests in environments that aren't setup locally (i.e. PHP 5.2). With
-Dockunit you don't need to do this anymore.
+Lucyunit you don't need to do this anymore.
 
 ## Requirements
 
@@ -33,14 +35,14 @@ Dockunit you don't need to do this anymore.
 1. Install via npm:
 
   ```bash
-  npm install -g dockunit
+  npm install -g lucyunit
   ```
 
 ## Usage
 
-Dockunit relies on `Dockunit.json` files. Each of your projects should have their own `Dockunit.json` file.
-`Dockunit.json` defines what test commands should be run on what type of containers for any given project. Here is an
-example `Dockunit.json`:
+Lucyunit relies on `Lucyunit.json` files. Each of your projects should have their own `Lucyunit.json` file.
+`Lucyunit.json` defines what test commands should be run on what type of containers for any given project. Here is an
+example `Lucyunit.json`:
 
 ```json
 {
@@ -65,40 +67,40 @@ example `Dockunit.json`:
 `containers` contains an array of container objects. Each container object can contain the following properties:
 
 * `prettyName` (required) - This is used in output to help you identify your container.
-* `image` (required) - This is a valid Docker container image located in the [Docker registry](https://registry.hub.docker.com/). We have a number of handy [prebuilt Docker images](https://github.com/dockunit/docker-prebuilt) for use in your `Dockunit.json` files.
+* `image` (required) - This is a valid Docker container image located in the [Docker registry](https://registry.hub.docker.com/). We have a number of handy [prebuilt Docker images](https://github.com/dockunit/docker-prebuilt) for use in your `Lucyunit.json` files.
 * `beforeScripts` (optional) - This is a string array of bash scripts to be run in order.
 * `testCommand` (required) - This is the actual test command to be run on each container i.e. phpunit or qunit.
 * `shell`: (optional) - The shell of the container (defaul is /bin/sh)
 
-The Dockunit command is:
+The Lucyunit command is:
 
 ```bash
-dockunit <path-to-project-directory> [--du-verbose] [--du-container] [--help] [--version] ...
+lucyunit <path-to-project-directory> [--lcy-verbose] [--lcy-container] [--help] [--version] ...
 ```
 
-_Note:_ `sudo` is usually required when run within a Linux distribution since Dockunit runs Docker commands which require special permissions.
+_Note:_ `sudo` is usually required when run within a Linux distribution since Lucyunit runs Docker commands which require special permissions.
 
-* `<path-to-project-directory>` (optional) - If you run `dockunit` in a folder with a `Dockunit.json` folder, it will detect it
+* `<path-to-project-directory>` (optional) - If you run `dockunit` in a folder with a `Lucyunit.json` folder, it will detect it
 automatically.
-* `[--du-verbose]` (optional) - This will print out light verbose Dockunit output. `[--du-verbose=2]` will output even more verbose Dockunit output.
-* `[--du-container]` (optional) - Run only one container in your `Dockunit.json` file by specifying the index of that container in the `containers` array .i.e `--du-container=1`.
+* `[--lcy-verbose]` (optional) - This will print out light verbose Lucyunit output. `[--lcy-verbose=2]` will output even more verbose Lucyunit output.
+* `[--lcy-container]` (optional) - Run only one container in your `Lucyunit.json` file by specifying the index of that container in the `containers` array .i.e `--lcy-container=1`.
 * `[--help]` (optional) - This will display usage information for the `dockunit` command.
-* `[--version]` (optional) - This will display the current installed version of Dockunit.
+* `[--version]` (optional) - This will display the current installed version of Lucyunit.
 * `...` - Any additional arguments and options passed to the command will be passed to your test command. For example,
-if you wanted to pass a few extra options to PHPUnit, you could append them to the end of your `dockunit` command.
+if you wanted to pass a few extra options to PHPUnit, you could append them to the end of your `lucyunit` command.
 
-__*You can simply run `dockunit` in any folder with a `Dockunit.json` to run Dockunit.*__
+__*You can simply run `lucyunit` in any folder with a `Lucyunit.json` to run Lucyunit.*__
 
-## Dockunit.json Examples
+## Lucyunit.json Examples
 
-Each of your projects should have a `Dockunit.json` file in the project root. You should define your containers to fit
-your application's unique needs. Here's a few example `Dockunit.json` files for a variety of different programming languages and
-environments. Feel free to use any of our [prebuilt Docker images](https://hub.docker.com/r/dockunit/prebuilt-images/) in your `Dockunit.json` files or create your own.
+Each of your projects should have a `Lucyunit.json` file in the project root. You should define your containers to fit
+your application's unique needs. Here's a few example `Lucyunit.json` files for a variety of different programming languages and
+environments. Feel free to use any of our [prebuilt Docker images](https://hub.docker.com/r/dockunit/prebuilt-images/) in your `Lucyunit.json` files or create your own.
 
 ### PHP and WordPress
 
-Dockunit and WordPress work well together. WordPress is backwards compatible with PHP 5.2. It's very difficult to test
-applications on PHP 5.2 without some sort of containerized workflow. Here is an example `Dockunit.json` file that you
+Lucyunit and WordPress work well together. WordPress is backwards compatible with PHP 5.2. It's very difficult to test
+applications on PHP 5.2 without some sort of containerized workflow. Here is an example `Lucyunit.json` file that you
 can use to test your WordPress plugins in PHP 5.2, 5.6, and PHP 7.0 RC 1 (make sure to replace `PLUGIN-FILE.php` with your plugins main file):
 
 ```javascript
@@ -143,7 +145,7 @@ can use to test your WordPress plugins in PHP 5.2, 5.6, and PHP 7.0 RC 1 (make s
 }
 ```
 
-Here is an example `Dockunit.json` file that you can use to test your WordPress themes in PHP 5.2, 5.6, and PHP 7.0 RC 1:
+Here is an example `Lucyunit.json` file that you can use to test your WordPress themes in PHP 5.2, 5.6, and PHP 7.0 RC 1:
 
 ```javascript
 {
@@ -227,95 +229,8 @@ Here are some more advanced WordPress examples. That assume you have unit tests 
 
 [dockunit/prebuilt-images:php-mysql-phpunit-5.6-fpm](https://hub.docker.com/r/dockunit/prebuilt-images/), [dockunit/prebuilt-images:php-mysql-phpunit-5.6-fpm](https://hub.docker.com/r/dockunit/prebuilt-images), and [dockunit/prebuilt-images:php-mysql-phpunit-7.0-rc-1-fpm](https://hub.docker.com/r/dockunit/prebuilt-images) are valid Docker images available for use in any `Dockerfile.json`.
 
-### Node.js
-
-It is super easy to test your Node.js applications with Dockunit. Here is a simple `Dockunit.json` file that tests
-an application in Node.js 0.10.x and 0.12.0 using [mocha](http://mochajs.org/):
-
-```javascript
-{
-  "containers": [
-    {
-      "prettyName": "Node 0.10.x",
-      "image": "google/nodejs:latest",
-      "beforeScripts": [
-        "npm install -g mocha"
-      ],
-      "testCommand": "mocha"
-    },
-    {
-      "prettyName": "Node 0.12",
-      "image": "tlovett1/nodejs:0.12",
-      "beforeScripts": [
-        "npm install -g mocha"
-      ],
-      "testCommand": "mocha"
-    }
-  ]
-}
-```
-
-[google/nodejs](https://registry.hub.docker.com/u/google/nodejs/) is a valid Docker image available for use in any `Dockerfile.json`.
-
-### Python
-
-Dockunit works great with Python. This `Dockunit.json` file tests in Python 2.7.9 and the latest Python version using [nose](https://nose.readthedocs.org/en/latest/):
-
-```javascript
-{
-  "containers": [
-    {
-      "prettyName": "Python 2.7.9",
-      "image": "python:2.7.9",
-      "beforeScripts": [
-        "easy_install nose"
-      ],
-      "testCommand": "nosetests tests"
-    },
-    {
-      "prettyName": "Python Latest",
-      "image": "python:latest",
-      "beforeScripts": [
-        "easy_install nose"
-      ],
-      "testCommand": "nosetests tests"
-    }
-  ]
-}
-```
-
-### Ruby
-
-You can use Dockunit to test your Ruby scripts. This `Dockunit.json` file tests a project in Ruby 2.1 and the latest
-stable Ruby version using [test-unit](https://rubygems.org/gems/test-unit):
-
-```javascript
-{
-  "containers": [
-    {
-      "prettyName": "Latest version of Ruby",
-      "image": "ruby:latest",
-      "beforeScripts": [
-        "bundle install"
-      ],
-      "testCommand": "bundle exec rake test"
-    },
-    {
-      "prettyName": "Ruby version 2.1",
-      "image": "ruby:2.1",
-      "beforeScripts": [
-        "bundle install"
-      ],
-      "testCommand": "bundle exec rake test"
-    }
-  ]
-}
-```
-
-[ruby](https://registry.hub.docker.com/_/ruby/) is a valid Docker image available for use in any `Dockerfile.json`.
-
 ## License
 
-Dockunit is free software; you can redistribute it and/or modify it under the terms of the [GNU General
+Lucyunit is free software; you can redistribute it and/or modify it under the terms of the [GNU General
 Public License](http://www.gnu.org/licenses/gpl-2.0.html) as published by the Free Software Foundation; either version
 2 of the License, or (at your option) any later version.
